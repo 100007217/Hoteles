@@ -12,6 +12,7 @@
         <th>ID</th>
         <th>NAME</th>
         <th>CITY</th>
+        <th>STARS</th>
         <td>
             <form action="{{url('/createHotel')}}" method="get">
                 {{method_field('get')}}
@@ -25,13 +26,18 @@
         <td>{{$hotel->id}}</td>
         <td>{{$hotel->name}}</td>
         <td>{{$hotel->city}}</td>
+        <td>{{$hotel->stars}}</td>
         <td>
-            <form action="{{url('updateHotel/'.$hotel->id)}}" method="get">
+            <form action="{{url('updateHotel/'.$hotel->id)}}" method="post">
+                @csrf
+                {{method_field('PUT')}}
                 <input type="submit" value="Modificar datos">
             </form>
         </td>
         <td>
-            <form action="{{url('deleteHotel/'.$hotel->id)}}" method="get">
+            <form action="{{url('deleteHotel/'.$hotel->id)}}" method="post">
+                @csrf
+                {{method_field('DELETE')}}
                 <input type="submit" value="Eliminar hotel">
             </form>
         </td>

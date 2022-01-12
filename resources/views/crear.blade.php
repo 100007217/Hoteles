@@ -13,7 +13,8 @@
         {{method_field('post')}}
         <input type="text" name="hotel_name" id="" placeholder="Nombre del hotel">
         <input type="text" name="hotel_city" id="" placeholder="Ciudad del Hotel">
-        <input type="number" name="" id="" min="1" max="5" placeholder="1-10">Estrellas
+        <input type="number" name="hotel_stars" id="" min="1" max="5" placeholder="1-10">Estrellas
+        <input type="submit" value="Crear">
     </form>
 </body>
 </html>

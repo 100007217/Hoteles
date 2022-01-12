@@ -35,6 +35,17 @@ class HotelController extends Controller
         return view('crear');
     }
 
+    public function createPost(Request $request)
+    {
+        $datos = $request->except('_token');
+        DB::table('hotels')->insert([
+            'name' => $datos['hotel_name'],
+            'city' => $datos['hotel_city'],
+            'stars' => $datos['hotel_stars'],
+        ]);
+        return redirect("/index");
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -75,10 +86,23 @@ class HotelController extends Controller
      * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hotel $hotel)
+    public function update($id)
     {
-        //
+        $datosHotel=DB::table('hotels')->where('id', '=',$id)->get();
+        //return $datosHotel;
+        return view('modificar', ['detallesHotel' => $datosHotel]);
     }
+    public function updateHotelPost(Request $request){
+        $id = $request->input('hotel_id');
+        $name = $request->input('hotel_name');
+        $city = $request->input('hotel_city');
+        $stars = $request->input('hotel_stars');
+        DB::update('update hotels set name = ?,city=?,stars=? where id = ?',[$name,$city,$stars,$id]);
+        return redirect('/index');
+    }
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -86,8 +110,9 @@ class HotelController extends Controller
      * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hotel $hotel)
+    public function destroy($id)
     {
-        //
+        DB::table('hotels')->where('id', '=',$id)->delete();
+        return redirect('/index');
     }
 }

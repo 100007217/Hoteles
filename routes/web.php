@@ -20,9 +20,14 @@ Route::get('/', function () {
 
 Route::get('/index', [HotelController::class, 'index']);
 
-Route::get('/updateHotel/{id}', [HotelController::class, 'update']);
+Route::put('/updateHotel/{id}', [HotelController::class, 'update']);
 
-Route::get('/deleteHotel/{id}', [HotelController::class, 'destroy']);
+Route::put('/updateHotelPost', [HotelController::class, 'updateHotelPost']);
+
+Route::delete('/deleteHotel/{id}', [HotelController::class, 'destroy']);
 
 Route::get('/createHotel', [HotelController::class, 'create']);
+
+Route::post('/createHotelPost', [HotelController::class, 'createPost']);
+
 
